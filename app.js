@@ -29,12 +29,26 @@ const examrecordsSchema = new mongoose.Schema({
 const Examrecordsmodel = mongoose.model('ExamRecords', examrecordsSchema);
 
 app.get('/', (req, res) => {
-    const task1 = new Examrecordsmodel({
+    const record = new Examrecordsmodel({
     name: 'Rushan Albreththulage', sid : '300361357'
+  });
+
+  // save the new object (newBook)
+  record
+    .save()
+    .then(() =>  res.send(`<h1>Collection Added</h1>`))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
-Examrecordsmodel.insertMany([task1]);
-    res.send(`<h1>Collection Added</h1>`);
-});
+
+// app.get('/', (req, res) => {
+//     const task1 = new Examrecordsmodel({
+//     name: 'Rushan Albreththulage', sid : '300361357'
+// });
+// Examrecordsmodel.insertMany([task1]);
+//     res.send(`<h1>Collection Added</h1>`);
+// });
+
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
